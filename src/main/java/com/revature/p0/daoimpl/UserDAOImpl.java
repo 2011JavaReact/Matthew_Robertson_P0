@@ -28,6 +28,7 @@ public class UserDAOImpl implements UserDAO{
 		ps.executeUpdate();
 	}
 	
+	
 	public ArrayList<User> getUserList() throws SQLException {
 		
 		ArrayList<User> userList = new ArrayList<User>();
@@ -47,9 +48,11 @@ public class UserDAOImpl implements UserDAO{
 		return userList;
 	}
 	
-	public User getUserById(int id) throws SQLException{
+	
+	public ArrayList<User> getUserById(int id) throws SQLException{
+		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cs.getConnection();
-		String sql = "SELECT * FROM USER WHERE USER_ID = ?";
+		String sql = "SELECT * FROM USERS WHERE USER_ID = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
@@ -57,9 +60,11 @@ public class UserDAOImpl implements UserDAO{
 		while(rs.next()) {
 			u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 					rs.getString(5), rs.getString(6)); 
+		userList.add(u);
 		}
-		return u;
+		return userList;
 	}
+	
 	
 	public boolean updateUserInfo(int userId, String username, String password, String firstname, String lastname, String email) throws SQLException{
 		Connection conn = cs.getConnection();

@@ -1,25 +1,63 @@
 package com.revature.p0.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.p0.daoimpl.UserDAOImpl;
+import com.revature.p0.model.User;
 
+@WebServlet("/getUserByIdServlet")
 public class GetUserByIdServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    public GetUserByIdServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	UserDAOImpl udi = new UserDAOImpl();
+	ObjectMapper om = new ObjectMapper();
+
+	public GetUserByIdServlet() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+
+		if (session != null) {
+			try {
+				System.out.println("ServeId Check");
+				int uid = (Integer) session.getAttribute("userId");
+				ArrayList<User> userList = udi.getUserById(uid);
+				response.getWriter().write((new ObjectMapper()).writeValueAsString(userList));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			response.setStatus(400);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+
+		if (session != null) {
+			try {
+				System.out.println("ServeId Check");
+				int uid = (Integer) session.getAttribute("userId");
+				ArrayList<User> userList = udi.getUserById(uid);
+				response.getWriter().write((new ObjectMapper()).writeValueAsString(userList));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			response.setStatus(400);
+		}
 	}
 
 }

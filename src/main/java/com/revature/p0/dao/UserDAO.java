@@ -11,7 +11,7 @@ public void createUser(String username, String password, String firstname, Strin
 
 public ArrayList<User> getUserList() throws SQLException;
 
-public User getUserById(int id) throws SQLException;
+public ArrayList<User> getUserById(int id) throws SQLException;
 
 public boolean updateUserInfo(int userId, String username, String password, String firstname, String lastname, String email) throws SQLException;
 
