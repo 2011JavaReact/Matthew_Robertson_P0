@@ -21,4 +21,34 @@
     <servlet-name>CreateBudgetMonthlyServlet</servlet-name>
     <url-pattern>/CreateBudgetMonthlyServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SessionServlet</display-name>
+    <servlet-name>SessionServlet</servlet-name>
+    <servlet-class>com.revature.p0.servlet.SessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionServlet</servlet-name>
+    <url-pattern>/SessionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateUserServlet</display-name>
+    <servlet-name>UpdateUserServlet</servlet-name>
+    <servlet-class>com.revature.p0.servlet.UpdateUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUserServlet</servlet-name>
+    <url-pattern>/UpdateUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetBudgetMonthlyByIdServlet</display-name>
+    <servlet-name>GetBudgetMonthlyByIdServlet</servlet-name>
+    <servlet-class>com.revature.p0.servlet.GetBudgetMonthlyByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetBudgetMonthlyByIdServlet</servlet-name>
+    <url-pattern>/GetBudgetMonthlyByIdServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -18,7 +18,6 @@ import com.revature.p0.model.User;
 public class GetUserByIdServlet extends HttpServlet {
 
 	UserDAOImpl udi = new UserDAOImpl();
-	ObjectMapper om = new ObjectMapper();
 
 	public GetUserByIdServlet() {
 		super();
@@ -30,7 +29,6 @@ public class GetUserByIdServlet extends HttpServlet {
 
 		if (session != null) {
 			try {
-				System.out.println("ServeId Check");
 				int uid = (Integer) session.getAttribute("userId");
 				ArrayList<User> userList = udi.getUserById(uid);
 				response.getWriter().write((new ObjectMapper()).writeValueAsString(userList));

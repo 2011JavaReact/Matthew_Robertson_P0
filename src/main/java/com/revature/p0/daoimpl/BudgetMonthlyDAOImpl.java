@@ -11,10 +11,11 @@ import com.revature.p0.dao.BudgetMonthlyDAO;
 import com.revature.p0.model.BudgetMonthly;
 import com.revature.p0.util.ConnSingleton;
 
-public class BudgetMonthlyDAOImpl implements BudgetMonthlyDAO{
+public class BudgetMonthlyDAOImpl implements BudgetMonthlyDAO {
 	
 	public static ConnSingleton cs = ConnSingleton.getInstance();
 	
+	@Override
 	public boolean createBudgetMonthly(int user_id, double housing, double utilities, double internet, double grocery, double entertainment, double transportation, double savings) throws SQLException {
 		Connection conn = cs.getConnection();
 		String sql = "INSERT INTO BUDGET_MONTHLY VALUES (NEXTVAL('bmseq'),?,?,?,?,?,?,?,?)";
@@ -31,6 +32,7 @@ public class BudgetMonthlyDAOImpl implements BudgetMonthlyDAO{
 		return true;
 	}
 	
+	@Override
 	public ArrayList<BudgetMonthly> getBudgetMonthly(){
 		ArrayList<BudgetMonthly> budgetMonthly = new ArrayList<BudgetMonthly>();
 		try {
@@ -48,6 +50,21 @@ public class BudgetMonthlyDAOImpl implements BudgetMonthlyDAO{
 			e.printStackTrace(); 
 		}
 		return budgetMonthly;
+	}
+	
+	public ArrayList<BudgetMonthly> getBudgetMonthlyById(int id) throws SQLException {
+		ArrayList<BudgetMonthly> reqList = new ArrayList<>();
+		Connection conn = cs.getConnection();
+		String sql = "SELECT * FROM BUDGET_MONTHLY WHERE EMPLOYEE_ID = ?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		BudgetMonthly bm = null;
+		while(rs.next()) {
+			bm = new BudgetMonthly(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9));
+			reqList.add(bm);
+		}
+		return reqList;
 	}
 	
 }

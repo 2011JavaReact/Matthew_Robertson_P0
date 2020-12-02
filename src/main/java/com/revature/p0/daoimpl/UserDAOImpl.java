@@ -15,7 +15,7 @@ public class UserDAOImpl implements UserDAO{
 	
 	public static ConnSingleton cs = ConnSingleton.getInstance();
 	
-	
+	@Override
 	public void createUser(String username, String password, String firstname, String lastname, String email) throws SQLException {
 		Connection conn = cs.getConnection();
 		String sql = "INSERT INTO USERS VALUES (NEXTVAL('userseq'),?,?,?,?,?)";
@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO{
 		ps.executeUpdate();
 	}
 	
-	
+	@Override
 	public ArrayList<User> getUserList() throws SQLException {
 		
 		ArrayList<User> userList = new ArrayList<User>();
@@ -48,7 +48,7 @@ public class UserDAOImpl implements UserDAO{
 		return userList;
 	}
 	
-	
+	@Override
 	public ArrayList<User> getUserById(int id) throws SQLException{
 		ArrayList<User> userList = new ArrayList<User>();
 		Connection conn = cs.getConnection();
@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO{
 		return userList;
 	}
 	
-	
+	@Override
 	public boolean updateUserInfo(int userId, String username, String password, String firstname, String lastname, String email) throws SQLException{
 		Connection conn = cs.getConnection();
 		String sql = "UPDATE USERS SET FIRSTNAME = (?), LASTNAME = (?), USERNAME = (?), PASSWORD = (?), EMAIL = (?) WHERE EMPLOYEES_ID = (?)";
